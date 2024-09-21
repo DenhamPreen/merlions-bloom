@@ -4,7 +4,7 @@
 
 A super simple, consumer-focused, single-player, coin toss game with novel game mechanics, where a player can win a prize by flipping a coin.
 
-Merlion’s Bloom adds a twist by incorporating DeFi and novel game mechanisms that make the game a compelling experience and providing its players with real opportunities to win prizes. Deployed live on the **Flow Mainnet** and available to play at **INSERT URL**
+Merlion’s Bloom adds a twist by incorporating DeFi and novel game mechanisms that make the game a compelling experience and providing its players with real opportunities to win prizes. Deployed live on the **Flow Mainnet** and available to play at https://merlions-bloom.vercel.app/.
 
 This hackathon project was built at the [ETHGlobal Singapore 2024 Hackathon](https://ethglobal.com/events/singapore2024)
 
