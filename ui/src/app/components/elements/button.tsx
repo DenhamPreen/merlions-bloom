@@ -2,12 +2,15 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  
+  isPending: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ label,  isPending }) => {
   return (
-    <button      
+    <button     
+    disabled={isPending}
+      type="submit" 
       className="
         mx-auto
         relative

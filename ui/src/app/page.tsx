@@ -6,25 +6,48 @@ import RevealCoin from "@/app/components/revealCoin";
 import { useAccount } from 'wagmi'
 import Loader from "@/app/components/loaders";
 import CoinAnimation from "@/app/components/CoinAnimation";
+import { useState, useEffect } from 'react';
 
 export default function Home() {
 
-  const {  isConnecting, isDisconnected } = useAccount()
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const { address , isConnecting, isDisconnected } = useAccount()
+
+    // unclicked || heads || tails || flipping
+  const [coinAnimationState, setCoinAnimationState] = useState('unclicked');
+  const [selection, setSelection] = useState('');
 
   return (
     
     <div className="grid  items-center justify-items-center min-h-screen p-8 pb-20 gap-10 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+       
       <main className="flex flex-col gap-2 row-start-2 items-center sm:items-start">
         <div className="mx-auto"><Logo />        </div>
+
         {isDisconnected  ? 
         <p className="max-w-[500px] text-center font-mono">A super simple, consumer-focused, single-player, coin toss game with novel game mechanics, where a player can win a prize by flipping a coin.</p>
-        : isConnecting ? <span/> : <span/>  }                   
+        : isConnecting ? <span/> : <span/>  }         
+        {isMounted ?           
         <div className="flex flex-col gap-4 mt-4 items-center mx-auto">
-          {isDisconnected  ? <w3m-button /> : isConnecting ? <Loader/> : <><FlipCoin/><RevealCoin/>    </> }                   
-                        
-        {/* <CoinAnimation result="heads" flip={false} /> */}
-
-        </div>      
+       
+          {isDisconnected  ? <span /> : isConnecting ?    <span/> : <CoinAnimation state={coinAnimationState} />}
+          {isDisconnected  ? <w3m-button /> : isConnecting ? <Loader/> : 
+          <>
+          {
+            coinAnimationState === 'unclicked' ? <FlipCoin setCoinAnimationState={setCoinAnimationState} setSelection={setSelection}/> : <span/>} 
+          {
+            coinAnimationState === 'flipping' ? <RevealCoin setCoinAnimationState={setCoinAnimationState} selection={selection} address={address} /> : <span/>
+            // coinAnimationState === 'flipping' ? <RevealCoin setCoinAnimationState={setCoinAnimationState}/> : <span/>
+          }
+          </> 
+          }                                         
+        </div>  
+        : <span/>}    
       </main>
       <footer className="row-start-3 flex flex-col gap-6 flex-wrap items-center justify-center">
     
@@ -89,7 +112,7 @@ export default function Home() {
           rel="noopener noreferrer">Reown</a></div>  
         </div>
       </footer>
-      
+      : 
     </div>
   );
 }
