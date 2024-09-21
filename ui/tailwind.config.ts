@@ -15,6 +15,25 @@ const config: Config = {
         secondary: "#5C8089"
         // primary: "#58637D"
       },
+      keyframes: {
+        flip: {
+          '0%': { transform: 'rotateX(0)' },
+          '100%': { transform: 'rotateX(360deg)' },
+        },
+        heads: {
+          '0%': { transform: 'rotateX(0)' },
+          '100%': { transform: 'rotateX(0deg)' },
+        },
+        tails: {
+          '0%': { transform: 'rotateX(0)' },
+          '100%': { transform: 'rotateX(180deg)' },
+        },
+      },
+      animation: {
+        flip: 'flip 1s ease-in-out forwards',
+        heads: 'heads 0.5s ease-in-out forwards',
+        tails: 'tails 0.5s ease-in-out forwards',
+      },
     },
   },
   plugins: [],
