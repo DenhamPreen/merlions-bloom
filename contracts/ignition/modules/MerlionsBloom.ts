@@ -17,7 +17,12 @@ console.log("a")
   //   value: 1n,
   // });
 
-console.log("b")
+  console.log("b")
+  m.call(merlionsBloom, "flipCoin", [], {
+    value: BigInt(1e18), // 1flow
+  });
+
+console.log("c")
 
   return { merlionsBloom };
 });

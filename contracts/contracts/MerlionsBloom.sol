@@ -22,7 +22,7 @@ contract MerlionsBloom is CadenceRandomConsumer {
 
     constructor() {
         // Game start amount in 1 FLOW token
-        currentDepositAmount = 10e18;
+        currentDepositAmount = 1e18;
     }
 
     /**
