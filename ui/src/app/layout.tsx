@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import ContextProvider from '@/app/context'
 import { headers } from "next/headers"; // added
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -31,7 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-         <ContextProvider cookies={cookies}>{children}</ContextProvider>
+         <ContextProvider cookies={cookies}>
+          {children}
+          <Toaster position="bottom-left" />
+         </ContextProvider>
       </body>
     </html>
   );
