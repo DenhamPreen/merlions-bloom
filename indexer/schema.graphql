@@ -12,17 +12,12 @@ type User {
   totalNo0fGamesWon: Int!
 }
 
-enum CoinFace{
-  HEADS
-  TAILS
-}
-
 type Game {
   id: ID! # requestId  
   closed: Boolean!
   user: String! 
-  coinFace: CoinFace
-  prize: BigInt
+  won: Boolean!
+  prize: BigInt!
   amount: BigInt!
 }
 
