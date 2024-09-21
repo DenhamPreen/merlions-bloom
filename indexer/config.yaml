@@ -4,11 +4,11 @@ networks:
 - id: 545
   rpc_config:
     url: https://testnet.evm.nodes.onflow.org
-  start_block: 6479514
+  start_block: 6499523
   contracts:
   - name: MerlionsBloom
     address:
-    - 0x9Dd7db629FCe28EF501c3713A5Cc7f22d9B488DE
+    - 0x992ca660013553acfC1649418C490d91B4Ce5E42
     handler: src/EventHandlers.ts
     events:
     - event: CoinFlipped(address indexed user, uint256 requestId, uint256 amount)

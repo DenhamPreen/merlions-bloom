@@ -1,18 +1,32 @@
-type MerlionsBloom_CoinFlipped {
-  id: ID!
-  user: String!
-  requestId: BigInt!
+type GlobalState {
+  id: ID! # "GlobalState"
+  currentDepositAmount: BigInt!
+}
+
+type User {
+  id: ID! # account
+  user: String! 
+  totalNoOfGames: Int!
+  totalDeposit: BigInt!
+  totalPrize: BigInt!
+  totalNo0fGamesWon: Int!
+}
+
+enum CoinFace{
+  HEADS
+  TAILS
+}
+
+type Game {
+  id: ID! # requestId  
+  closed: Boolean!
+  user: String! 
+  coinFace: CoinFace
+  prize: BigInt
   amount: BigInt!
 }
 
-type MerlionsBloom_CoinRevealed {
-  id: ID!
-  user: String!
-  requestId: BigInt!
-  coinFace: BigInt!
-  prize: BigInt!
-}
-
+# Raw Randomness event Data
 type MerlionsBloom_RandomnessFulfilled {
   id: ID!
   requestId: BigInt!
@@ -27,4 +41,5 @@ type MerlionsBloom_RandomnessRequested {
   flowHeight: BigInt!
   evmHeight: BigInt!
 }
+
 
