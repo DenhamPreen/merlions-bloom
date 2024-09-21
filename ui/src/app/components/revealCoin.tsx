@@ -10,14 +10,16 @@ import { useFetchGameOutcome } from '../hooks/useFetchGameOutcome';
 interface RevealCoinProps {
   setCoinAnimationState: (state: any) => void;
   selection: string;
-  address: string;
+  address: `0x${string}` | undefined;
 }
 
 export default function RevealCoin({setCoinAnimationState, selection, address}: RevealCoinProps) {  
 
   const [stateHack, setStateHack] = React.useState(false);
 
-  const { isFetching, won, prize, closed , error :fetchError } = useFetchGameOutcome(address, stateHack);
+  let userAddress = address ? address : `0x123`
+
+  const { isFetching, won, prize, closed , error :fetchError } = useFetchGameOutcome(userAddress, stateHack);
 
   console.log("{isFetching, won, fetchError}")
   console.log({isFetching, won, prize ,fetchError})
