@@ -36,8 +36,7 @@ export default function FlipCoin({ setCoinAnimationState, setSelection }: FlipCo
       console.log({isPending, error})
 
       async function submit(e: React.FormEvent<HTMLFormElement>) { 
-        setCoinAnimationState('flipping')
-        toast("Confirm tx in your wallet then reveal flip in the next transaction")
+       
         e.preventDefault() 
         const formData = new FormData(e.target as HTMLFormElement) 
         
@@ -51,6 +50,9 @@ export default function FlipCoin({ setCoinAnimationState, setSelection }: FlipCo
           value: currentDepositAmountKnown,
         })
 
+        setCoinAnimationState('flipping')
+        toast("Confirm tx in your wallet then reveal flip in the next transaction")
+
         console.log("b")
       } 
 
@@ -61,7 +63,7 @@ export default function FlipCoin({ setCoinAnimationState, setSelection }: FlipCo
         if (error){
           toast.error(error.message)
         }
-      }, [hash])
+      }, [hash, isPending])
     
       return (
         <>

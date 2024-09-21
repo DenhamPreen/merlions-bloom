@@ -75,13 +75,18 @@ export default function RevealCoin({setCoinAnimationState, selection, address}: 
       return (
         
         <form onSubmit={submit}>          
-          <button 
+          {/* <button 
             disabled={isPending}
             type="submit"
           >
             
             {isPending ? 'Confirming...' : 'Reveal Coin'}
-          </button>          
+          </button>        */}
+
+          <Button             
+            isPending={isPending}
+            label={isPending ? 'Confirming...' : 'Reveal Outcome'}
+            />   
         </form>
         
     )
