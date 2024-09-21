@@ -1,0 +1,30 @@
+type MerlionsBloom_CoinFlipped {
+  id: ID!
+  user: String!
+  requestId: BigInt!
+  amount: BigInt!
+}
+
+type MerlionsBloom_CoinRevealed {
+  id: ID!
+  user: String!
+  requestId: BigInt!
+  coinFace: BigInt!
+  prize: BigInt!
+}
+
+type MerlionsBloom_RandomnessFulfilled {
+  id: ID!
+  requestId: BigInt!
+  flowHeight: BigInt!
+  evmHeight: BigInt!
+  randomResult: BigInt!
+}
+
+type MerlionsBloom_RandomnessRequested {
+  id: ID!
+  requestId: BigInt!
+  flowHeight: BigInt!
+  evmHeight: BigInt!
+}
+
