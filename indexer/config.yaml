@@ -8,7 +8,8 @@ networks:
   contracts:
   - name: MerlionsBloom
     address:
-    - 0x992ca660013553acfC1649418C490d91B4Ce5E42
+    # - 0x992ca660013553acfC1649418C490d91B4Ce5E42
+    - 0x2797Eb5a5E2E9d9F87aE905b307Dd71b296C105F
     handler: src/EventHandlers.ts
     events:
     - event: CoinFlipped(address indexed user, uint256 requestId, uint256 amount)
