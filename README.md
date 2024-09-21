@@ -6,6 +6,14 @@ A super simple, consumer-focused, single-player, coin toss game with novel game 
 
 Merlion’s Bloom adds a twist by incorporating DeFi and novel game mechanisms that make the game a compelling experience and providing its players with real opportunities to win prizes. Deployed live on the **Flow Mainnet** and available to play at **INSERT URL**
 
+This hackathon project was built at the [ETHGlobal Singapore 2024 Hackathon](https://ethglobal.com/events/singapore2024)
+
+
+This code repository contains the code for:
+- UI - built with [Next.js](https://nextjs.org/) with React components
+- Indexer - built using [Envio](https://envio.dev/)
+- Smart Contracts - written in solidity and deployed on the [FLOW EVM Blockchain](https://flow.com/)
+
 ### How It Works
 
 To participate, a player deposits a specific amount of **FLOW tokens**, equal to or greater than the current game pool’s liquidity. Only one player can play at a time.
@@ -27,6 +35,3 @@ The odds of winning or losing are based on the **40% chance of winning** and **6
 This system makes the game **fair for all** players, while ensuring the liquidity pool is sustained over time. Although a player could have a lucky streak, the game starts with an initial liquidity reserve to absorb those potential wins and keep the game active.
 
 The Merlion’s Bloom smart contract holds logic of the game mechanics and is live and deployed on FLOW’s Mainnet, available to view here: https://evm-testnet.flowscan.io/address/0x992ca660013553acfC1649418C490d91B4Ce5E42
-
-
-
