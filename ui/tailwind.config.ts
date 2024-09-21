@@ -15,6 +15,17 @@ const config: Config = {
         secondary: "#5C8089"
         // primary: "#58637D"
       },
+      rotate: {
+        'y-180': '180deg',
+      },
+      keyframes: {
+        spinhorizon: {          
+          '100%': { transform: 'rotateX(360deg)' },
+        },
+      },
+      animation: {
+        spinhorizon: 'spinhorizon 2s linear infinite',
+      },
     },
   },
   plugins: [],

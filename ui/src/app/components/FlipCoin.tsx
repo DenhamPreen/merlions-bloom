@@ -7,9 +7,14 @@ import { formatEther } from 'viem';
 import React from "react";
 import { toast } from 'react-hot-toast';
 
+interface FlipCoinProps {
+  setCoinAnimationState: (state: any) => void;
+  setSelection: (state: any) => void;
+}
 
+export default function FlipCoin({ setCoinAnimationState, setSelection }: FlipCoinProps) {
 
-export default function FlipCoin() {
+  
 
     const {data: currentDepositAmount, error: amountError, isFetching: isAmountFetching} = useReadContract({
       address: contractAddress,
@@ -31,8 +36,12 @@ export default function FlipCoin() {
       console.log({isPending, error})
 
       async function submit(e: React.FormEvent<HTMLFormElement>) { 
+        setCoinAnimationState('flipping')
+        toast("Confirm tx in your wallet then reveal flip in the next transaction")
         e.preventDefault() 
+        const formData = new FormData(e.target as HTMLFormElement) 
         
+
         console.log("a")
  
         writeContract({
@@ -53,22 +62,33 @@ export default function FlipCoin() {
           toast.error(error.message)
         }
       }, [hash])
-
-    //   Button label="Play" onClick={() => console.log("play")} />
     
       return (
-        
-        <form onSubmit={submit}>          
-          <button 
-            disabled={isPending}
-            type="submit"
-          >
-            
-            {isPending ? 'Confirming...' : 'Flip coin'}
+        <>
+        <form onSubmit={submit} className="flex flex-row gap-4 items-center mx-auto">                       
+
+          <span onClick={() => setSelection('heads')}>
+
+          
+          <button disabled={isPending} type="submit" >
+          <Button             
+            isPending={isPending}
+            label={isPending ? 'Confirming...' : 'Heads'}
+            />
           </button>
-          {hash && <div>Transaction Hash: {hash}</div>}
-          <p className="text-xs text-gray-400"> {formatEther(currentDepositAmountKnown ? currentDepositAmountKnown : 0n)} FLOW tokens to play</p>
+            </span>
+            <span onClick={() => setSelection('tails')}>
+          <Button 
+            isPending={isPending}
+            label={isPending ? 'Confirming...' : 'Tails'}
+          />
+          </span>
+          
+            
+          {/* {hash && <div>Transaction Hash: {hash}</div>} */}
         </form>
+          <p className="text-xs text-gray-400 text-center mt-3"> {formatEther(currentDepositAmountKnown ? currentDepositAmountKnown : 0n)} FLOW tokens to play</p>
+          </>
         
     )
 }

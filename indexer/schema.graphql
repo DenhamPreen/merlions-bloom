@@ -10,6 +10,7 @@ type User {
   totalDeposit: BigInt!
   totalPrize: BigInt!
   totalNoOfGamesWon: Int!
+  latestGameRequestId: BigInt!
 }
 
 type Game {
