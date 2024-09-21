@@ -1,22 +1,20 @@
 import Image from "next/image";
 import Logo from "@/app/components/logo";
-import Button from "@/app/components/elements/button";
+import FlipCoin from "@/app/components/FlipCoin";
+import RevealCoin from "@/app/components/revealCoin";
 
 export default function Home() {
+
   return (
+    
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Logo />
-        {/* <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        /> */}
+    
         <div className="flex flex-col gap-4 items-center mx-auto">
-          <Button label="Play" onClick={() => console.log("play")} />
+        <FlipCoin/>
+        <RevealCoin/>          
+        <w3m-button />
         </div>
         {/* <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
@@ -55,8 +53,22 @@ export default function Home() {
           </a>
         </div> */}
       </main>
-      {/* <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
+      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      <div className="flex flex-row items-center gap-2">
+      <div>Built on </div>
+        <Image          
+          src="https://cdn.prod.website-files.com/5f734f4dbd95382f4fdfa0ea/6631788b54df47d98ec362a5_flow-logomark.png"
+          alt="Next.js logo"
+          width={90}
+          height={22}
+          priority
+        /> 
+        <div>using <a href="https://docs.reown.com/"  target="_blank" className="hover:underline hover:underline-offset-4"
+          rel="noopener noreferrer">Reown</a></div>  
+        </div>
+        
+   
+        {/* <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
           target="_blank"
@@ -100,8 +112,9 @@ export default function Home() {
             height={16}
           />
           Go to nextjs.org →
-        </a>
-      </footer> */}
+        </a> */}
+      </footer>
+      
     </div>
   );
 }
