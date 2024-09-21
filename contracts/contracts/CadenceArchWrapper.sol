@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.27;
 
 /**
  * @dev This contract is a base contract to facilitate easier consumption of the Cadence Arch pre-compiles. Implementing
