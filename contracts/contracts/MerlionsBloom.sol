@@ -56,7 +56,8 @@ contract MerlionsBloom is CadenceRandomConsumer {
 
         // fulfill the random request
         uint64 randomResult = _fulfillRandomness(uint32(requestId));
-        uint8 coinFace = uint8(randomResult % 2);
+        // Greater than 6 equals Win, i.e. 40% odds to win coin toss
+        uint8 coinFace = uint8(randomResult % 10);
 
         // get the value sent in the flipCoin function & remove the request from the openRequests mapping
         uint256 amount = openRequests[requestId];
@@ -65,7 +66,7 @@ contract MerlionsBloom is CadenceRandomConsumer {
         // calculate the prize
         uint256 prize = 0;
         // send the prize if the random result is even
-        if (coinFace == 0) {
+        if (coinFace >= 6) {
             prize = amount * multiplier;
             bool sent = payable(msg.sender).send(prize); // Use send to avoid revert
             require(sent, "Failed to send prize");
