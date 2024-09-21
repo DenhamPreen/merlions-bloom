@@ -19,6 +19,11 @@ contract MerlionsBloom is CadenceRandomConsumer {
     event CoinFlipped(address indexed user, uint256 requestId, uint256 amount);
     event CoinRevealed(address indexed user, uint256 requestId, uint8 coinFace, uint256 prize);
 
+    constructor() {
+        // Game start amount in 1 FLOW token
+        currentDepositAmount = 10e18;
+    }
+
     /**
      * @dev Checks if a user has an open request.
      */
@@ -30,19 +35,17 @@ contract MerlionsBloom is CadenceRandomConsumer {
      * @dev Allows a user to flip a coin by sending FLOW to the contract. This is the commit step in the commit-reveal scheme.
      */
     function flipCoin() public payable {
-        require(_isNonZero(msg.value), "Must send FLOW to place flip a coin");
+        require(msg.value >= currentDepositAmount, "Player's deposit must be greater than required deposit amount");
         require(!_isNonZero(currentRequestId), "Must close previous coin flip before placing a new one");
 
         // request randomness
         uint256 requestId = _requestRandomness();
         // insert the request ID into the coinTosses mapping
         currentRequestId = requestId;
-        // insert the value sent by the sender with the flipCoin function call into the openRequests mapping
-        currentDepositAmount = msg.value;
         // insert the address for current player
         currentPlayer = msg.sender;
 
-        emit CoinFlipped(msg.sender, requestId, msg.value);
+        emit CoinFlipped(msg.sender, requestId, currentDepositAmount);
     }
 
     /**
@@ -63,7 +66,6 @@ contract MerlionsBloom is CadenceRandomConsumer {
 
         // get the value sent in the flipCoin function & remove the request from the openRequests mapping
         uint256 amount = currentDepositAmount;
-        delete currentDepositAmount;
 
         address player = currentPlayer;
         delete currentPlayer;
@@ -75,6 +77,9 @@ contract MerlionsBloom is CadenceRandomConsumer {
             prize = amount * multiplier;
             bool sent = payable(player).send(prize); // Use send to avoid revert
             require(sent, "Failed to send prize");
+            currentDepositAmount = currentDepositAmount / multiplier;
+        }     else {
+            currentDepositAmount = currentDepositAmount * multiplier;
         }
 
         emit CoinRevealed(player, requestId, coinFace, prize);
