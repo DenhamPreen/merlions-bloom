@@ -47,13 +47,15 @@ MerlionsBloom.CoinFlipped.handler(async ({ event, context }) => {
       totalNoOfGames: 1,
       totalNoOfGamesWon: 0,
       totalDeposit: amount,
-      totalPrize: 0n      
+      totalPrize: 0n,      
+      latestGameRequestId: requestId
     }
   } else {
     user = {
       ...user,
       totalNoOfGames: user.totalNoOfGames + 1,            
       totalDeposit: user.totalDeposit + amount,      
+      latestGameRequestId: requestId
     }
   }
 
