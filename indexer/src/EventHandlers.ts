@@ -45,14 +45,14 @@ MerlionsBloom.CoinFlipped.handler(async ({ event, context }) => {
       id: userParam,
       user: userParam,
       totalNoOfGames: 1,
-      totalNo0fGamesWon: 0,
+      totalNoOfGamesWon: 0,
       totalDeposit: amount,
       totalPrize: 0n      
     }
   } else {
     user = {
       ...user,
-      totalNoOfGames: user.totalNo0fGamesWon + 1,      
+      totalNoOfGames: user.totalNoOfGames + 1,            
       totalDeposit: user.totalDeposit + amount,      
     }
   }
@@ -93,7 +93,7 @@ MerlionsBloom.CoinRevealed.handler(async ({ event, context }) => {
   context.User.set({
     ...user,
     totalPrize: user.totalPrize + prize,
-    totalNo0fGamesWon: user.totalNo0fGamesWon + (coinFace >= 6 ? 1 : 0)
+    totalNoOfGamesWon: user.totalNoOfGamesWon + (coinFace >= 6 ? 1 : 0)
   })
 
 });

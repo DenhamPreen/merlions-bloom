@@ -9,7 +9,7 @@ type User {
   totalNoOfGames: Int!
   totalDeposit: BigInt!
   totalPrize: BigInt!
-  totalNo0fGamesWon: Int!
+  totalNoOfGamesWon: Int!
 }
 
 type Game {
