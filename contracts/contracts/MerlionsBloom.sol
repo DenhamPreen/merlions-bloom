@@ -18,10 +18,11 @@ contract MerlionsBloom is CadenceRandomConsumer {
 
     event CoinFlipped(address indexed user, uint256 requestId, uint256 amount);
     event CoinRevealed(address indexed user, uint256 requestId, uint8 coinFace, uint256 prize);
+    event Received(address sender, uint amount);
 
     constructor() {
         // Game start amount in 1 FLOW token
-        currentDepositAmount = 10e18;
+        currentDepositAmount = 1e18;
     }
 
     /**
@@ -90,5 +91,13 @@ contract MerlionsBloom is CadenceRandomConsumer {
      */
     function _isNonZero(uint256 value) internal pure returns (bool) {
         return value > 0;
+    }
+
+        fallback() external payable {
+        emit Received(msg.sender, msg.value);
+    }
+
+     receive() external payable {
+        // custom function code
     }
 }
