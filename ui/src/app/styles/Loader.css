@@ -1,0 +1,44 @@
+/* Loader container styles */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;        
+  }
+  
+  /* Loader animation styling */
+  .loader {
+    display: flex;
+    justify-content: space-around;
+    width: 80px;
+    margin-bottom: 10px;
+  }
+  
+  .loader-ball {
+    width: 20px;
+    height: 20px;
+    background-color: #03193D; /* Bright red for the balls */
+    border-radius: 50%;
+    animation: bounce 0.6s infinite alternate;
+  }
+  
+  /* Delay the animation for each ball */
+  .loader-ball:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .loader-ball:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .loader-ball:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  /* Bouncing animation */
+  @keyframes bounce {
+    to {
+      transform: translateY(-20px);
+    }
+  }
+  

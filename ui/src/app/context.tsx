@@ -4,9 +4,12 @@ import { wagmiAdapter, flowTestnet , projectId } from '@/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
 import { mainnet, arbitrum, avalanche, base, optimism, polygon } from '@reown/appkit/networks'
-import React, { type ReactNode } from 'react'
+import React, { useEffect, type ReactNode } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 import { flowMainnet } from 'viem/chains'
+import { useWalletInfo } from '@reown/appkit/react'
+ 
+
 
 // Set up queryClient
 const queryClient = new QueryClient()
@@ -32,6 +35,11 @@ const modal = createAppKit({
   metadata: metadata,
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
+  },
+  themeVariables: {
+    '--w3m-accent': '#03193D',
+    '--w3m-color-mix-strength': 20,
+    '--w3m-border-radius-master' : '1px'
   }
 })
 

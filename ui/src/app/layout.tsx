@@ -26,6 +26,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const cookies = headers().get('cookie')
   return (
     <html lang="en">
