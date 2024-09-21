@@ -10,11 +10,9 @@ import "./CadenceRandomConsumer.sol";
 contract MerlionsBloom is CadenceRandomConsumer {
     // A constant to store the multiplier for the prize
     uint8 public constant multiplier = 2;
-
-    // A mapping to store the request ID for each user
-    mapping(address => uint256) public coinTosses;
-    // A mapping to store the value sent by the user for each request
-    mapping(uint256 => uint256) public openRequests;
+    
+    uint256 public currentRequestId; 
+    uint256 public currentDepositAmount;
 
     event CoinFlipped(address indexed user, uint256 requestId, uint256 amount);
     event CoinRevealed(address indexed user, uint256 requestId, uint8 coinFace, uint256 prize);
@@ -22,8 +20,8 @@ contract MerlionsBloom is CadenceRandomConsumer {
     /**
      * @dev Checks if a user has an open request.
      */
-    function hasOpenRequest(address user) public view returns (bool) {
-        return coinTosses[user] != 0;
+    function hasOpenRequest() public view returns (bool) {
+        return currentRequestId != 0;
     }
 
     /**
@@ -31,14 +29,14 @@ contract MerlionsBloom is CadenceRandomConsumer {
      */
     function flipCoin() public payable {
         require(_isNonZero(msg.value), "Must send FLOW to place flip a coin");
-        require(!_isNonZero(coinTosses[msg.sender]), "Must close previous coin flip before placing a new one");
+        require(!_isNonZero(currentRequestId), "Must close previous coin flip before placing a new one");
 
         // request randomness
         uint256 requestId = _requestRandomness();
         // insert the request ID into the coinTosses mapping
-        coinTosses[msg.sender] = requestId;
+        currentRequestId = requestId;
         // insert the value sent by the sender with the flipCoin function call into the openRequests mapping
-        openRequests[requestId] = msg.value;
+        currentDepositAmount = msg.value;
 
         emit CoinFlipped(msg.sender, requestId, msg.value);
     }
@@ -47,12 +45,12 @@ contract MerlionsBloom is CadenceRandomConsumer {
      * @dev Allows a user to reveal the result of the coin flip and claim their prize.
      */
     function revealCoin() public {
-        require(hasOpenRequest(msg.sender), "Caller has not flipped a coin - nothing to reveal");
+        require(hasOpenRequest(), "Caller has not flipped a coin - nothing to reveal");
 
         // reveal random result and calculate winnings
-        uint256 requestId = coinTosses[msg.sender];
+        uint256 requestId = currentRequestId;
         // delete the open request from the coinTosses mapping
-        delete coinTosses[msg.sender];
+        delete currentRequestId;
 
         // fulfill the random request
         uint64 randomResult = _fulfillRandomness(uint32(requestId));
@@ -60,8 +58,8 @@ contract MerlionsBloom is CadenceRandomConsumer {
         uint8 coinFace = uint8(randomResult % 10);
 
         // get the value sent in the flipCoin function & remove the request from the openRequests mapping
-        uint256 amount = openRequests[requestId];
-        delete openRequests[requestId];
+        uint256 amount = currentDepositAmount;
+        delete currentDepositAmount;
 
         // calculate the prize
         uint256 prize = 0;
